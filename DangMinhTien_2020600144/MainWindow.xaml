@@ -1,0 +1,207 @@
+﻿<Window x:Class="DangMinhTien_2020600144.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DangMinhTien_2020600144"
+        xmlns:fa ="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d"
+        Title="RSA" 
+        Height="800" 
+        Width="1300"
+        WindowState="Maximized"
+        Background="AliceBlue">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Column="0" Grid.Row="0" Margin="15 0 15 15" Padding="10 10" Grid.ColumnSpan="2" Background="AliceBlue">
+            <StackPanel>
+                <TextBlock FontSize="16px" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5">
+                Tạo khóa
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <RadioButton x:Name="rb512bits" Content="512" Margin="20 0" FontSize="13"  IsChecked="True"/>
+                    <RadioButton x:Name="rb1024bits" Content="1024" Margin="20 0" FontSize="13"/>
+                    <RadioButton x:Name="rb2048bits" Content="2048" Margin="20 0" FontSize="13"/>
+                    <RadioButton x:Name="rb4096bits" Content="4096" Margin="20 0" FontSize="13"/>
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="0 10 15 0" Grid.Column="0">
+                        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Padding="0" FontSize="13" Margin="0 0 0 5">
+                            Khóa công khai:
+                        </Label>
+                        <TextBox Padding="4 2" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Height="80" x:Name="tbPublicKey" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15 10 0 0" Grid.Column="1">
+                        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Padding="0" FontSize="13" Margin="0 0 0 5">
+                            Khóa bí mật:
+                        </Label>
+                        <TextBox Padding="4 2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="80" x:Name="tbPrivateKey" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Margin="0 15 0 0">
+                    <Button Style="{StaticResource myBtn}" x:Name="btnCreateKey" Width="150" Padding="0 5" FontSize="13" Click="btnCreateKey_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Key" Style="{StaticResource myBtnIcon}"/>
+                            <TextBlock>Tạo khóa</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+
+        <GroupBox Grid.Column="0" Grid.Row="1" Margin="15 10" Padding="10 5" Background="AliceBlue" >
+            <StackPanel>
+                <TextBlock FontSize="16px" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5">
+                Gửi
+                </TextBlock>
+                <StackPanel>
+                    <Button Style="{StaticResource myBtn}" x:Name="btnKy" IsEnabled="False" Width="150" Padding="0 5" FontSize="13" Click="btnKy_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="FileSignature" Style="{StaticResource myBtnIcon}"/>
+                            <TextBlock><Run Text="Thực hiện ký"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel>
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Padding="0" FontSize="13" Height="30" VerticalContentAlignment="Bottom">
+                            Văn bản:
+                        </Label>
+                        <StackPanel Grid.Column="1" Margin="5 0 0 0">
+                            <Button Style="{StaticResource myBtn}" x:Name="btnVanBanGui" Click="btnVanBanGui_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Style="{StaticResource myBtnIcon}" Icon="FileCirclePlus"/>
+                                    <TextBlock>Chọn file</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <TextBox Padding="1 2" Height="150" x:Name="tbVanBan" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                        <Border x:Name="webContainerGui" BorderBrush="Gray" BorderThickness="1 0 0 1">
+                            <StackPanel>
+                                <WebBrowser x:Name="webGui" Height="150" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource myBtn}" x:Name="btnSave" Width="150" Padding="0 5" Click="btnSave_Click" FontSize="13" Margin="10 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Save" Style="{StaticResource myBtnIcon}"/>
+                            <TextBlock><Run Text="Lưu chữ ký"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource myBtn}" x:Name="btnChuyen" Width="150" Padding="0 5" Click="btnChuyen_Click" FontSize="13" Margin="10 0">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="PaperPlane" Style="{StaticResource myBtnIcon}"/>
+                            <TextBlock><Run Text="Chuyển"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource myBtn}" x:Name="btnResetSender" Width="150" Padding="0 5" Click="btnResetSender_Click" FontSize="13" Margin="10 0">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Refresh" Style="{StaticResource myBtnIcon}"/>
+                                <TextBlock><Run Text="Refresh"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <Label Padding="0" FontSize="13" Margin="0 0 0 5" Height="30" VerticalContentAlignment="Bottom">
+                        Chữ ký:
+                    </Label>
+                    <TextBox Padding="4 2" IsEnabled="True" Height="100" x:Name="tbChuKy" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Grid.Row="1" Margin="15 10" Padding="10 5" Background="AliceBlue">
+            <StackPanel>
+                <TextBlock FontSize="16px" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5">
+                Nhận
+                </TextBlock>
+                <StackPanel>
+                    <Button Style="{StaticResource myBtn}" x:Name="btnKiemTra" Width="150" Padding="0 5" FontSize="13" Click="btnKiemTra_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="FileCircleCheck" Style="{StaticResource myBtnIcon}"/>
+                            <TextBlock><Run Text="Kiểm tra chữ ký"/></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel>
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Padding="0" FontSize="13" VerticalContentAlignment="Bottom">
+                            Văn bản:
+                        </Label>
+                        <StackPanel Grid.Column="1" Margin="5 0 0 0">
+                            <Button x:Name="btnSelectFileDataReceiver" Style="{StaticResource myBtn}" Click="btnSelectFileDataReceiver_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage Style="{StaticResource myBtnIcon}" Icon="FileCirclePlus"/>
+                                    <TextBlock>Chọn file</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <TextBox Padding="1 2" Height="150" x:Name="tbVanBanNhan" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                        <Border x:Name="webContainerReceiver" BorderBrush="Gray" BorderThickness="1 0 0 1">
+                            <StackPanel>
+                                <WebBrowser x:Name="webReceiver" Height="150" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+                <StackPanel>
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Padding="0" FontSize="13" VerticalContentAlignment="Bottom">
+                            Chữ ký:
+                        </Label>
+                        <Button Grid.Column="1" Style="{StaticResource myBtn}" x:Name="btnSelectSignature" Click="btnSelectSignature_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="FileCircleCheck" Style="{StaticResource myBtnIcon}"/>
+                                <TextBlock>Chọn file</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <TextBox Padding="4 2" IsEnabled="True" Height="100" x:Name="tbChuKyNhan" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                    <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource myBtn}" x:Name="btnResetReveiver" Width="150" Padding="0 5" Click="btnResetReveiver_Click" FontSize="13" Margin="10 0">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Refresh" Style="{StaticResource myBtnIcon}"/>
+                                <TextBlock><Run Text="Refresh"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
